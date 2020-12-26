@@ -1,0 +1,42 @@
+
+
+.bg {
+
+    position: absolute; 
+  top: 0; 
+  left: 0;
+  min-width: 100%;
+  min-height: 100%;
+  background-image: url('../../../assets/app-landing-bg-2.jpg');
+  background-size: cover;
+  }
+
+  .embed-responsive{
+    width: 95%;
+    height: 95%;
+  }
+  .img-thumbnail2{
+    padding: 0.25rem;
+    background-color: #fff;
+    border: 1px solid #dee2e6;
+    border-radius: 0.25rem;
+    width: 85%;
+    height: 85%;
+    align-items: center;
+    text-align: center;
+  }
+
+  .sub-row {
+    height: 50%;
+}
+
+.big{
+    height: 60px;
+    width: 250px;
+}
+
+.center-text{
+    text-align: center;
+    margin: auto
+}
+
