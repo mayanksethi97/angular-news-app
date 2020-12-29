@@ -7,10 +7,7 @@ import { MDBBootstrapModule } from 'angular-bootstrap-md';
 import { FormsModule } from '@angular/forms';
 import { AppLandingComponent } from './components/app-landing/app-landing.component';
 import { RouterModule } from '@angular/router';
-import { NewsModule } from './modules/news/news.module';
-import { RadioModule } from './modules/radio/radio.module';
-import { WeatherModule } from './modules/weather/weather.module';
-import { PodcastModule } from './modules/podcast/podcast.module';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -22,7 +19,8 @@ import { PodcastModule } from './modules/podcast/podcast.module';
     AppRoutingModule,
     MDBBootstrapModule.forRoot(),
     FormsModule,
-    RouterModule
+    RouterModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
