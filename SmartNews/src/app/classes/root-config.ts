@@ -1,7 +1,4 @@
-export const API_KEYS = {
-    geoApify: '6f4d00b2f56b442d9b4542bed73a3d60',
-    
-}
+
 
 export const apiEndpoints = {
     geoApify: {

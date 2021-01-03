@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
-import { apiEndpoints, API_KEYS } from '../classes/root-config';
+import { apiEndpoints } from '../classes/root-config';
+import { API_KEYS } from '../classes/api-keys';
 
 @Injectable({
   providedIn: 'root'

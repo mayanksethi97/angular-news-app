@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { API_KEYS } from '../classes/weather-config';
+import { API_KEYS } from '../../../classes/api-keys';
 
 @Injectable({
   providedIn: 'root'
