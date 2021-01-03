@@ -27,12 +27,15 @@ export class AppLandingComponent implements OnInit {
   ngOnInit(): void {
     
     this.getUserLocation();
-    if(this.hasUserLocation){
-      this.rootContextService.updateCurrentContext({currentUserLocation: this.currentUserLocation})
-    }
+    this.subscribeToContextChange();
+  }
 
-    this.subs.push(this.rootContextService.Context$.subscribe((res: any) => {
+
+  subscribeToContextChange(){
+    this.subs.push(this.rootContextService.ContextChange$.subscribe((res: any) => {
       console.log(res);
+      this.currentUserLocation = res.extraproperties.currentUserLocation;
+      this.hasUserLocation = true;
     }))
   }
 
@@ -49,28 +52,30 @@ export class AppLandingComponent implements OnInit {
     if(localStorage.getItem('userLocation')){
       const location = localStorage.getItem('userLocation');
       this.currentUserLocation = JSON.parse(location);
-      gotUserLocation = true;
+      this.hasUserLocation = true;
     }
     else{
       if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition((position)=>{
+          console.log(position); 
           const loc = {
             lat: position.coords.latitude,
             lng: position.coords.longitude,
             timeStamp: position.timestamp
           }
-          this.currentUserLocation = loc
-          localStorage.setItem('userLocation', JSON.stringify(loc))
           gotUserLocation = true;
+          this.reverseGeoCode(gotUserLocation, loc);
         });
     } else {
        console.log("No support for geolocation")
     }
     }
+    
+  }
 
-    console.log(this.currentUserLocation)
+  reverseGeoCode(gotUserLocation, loc){
     if(gotUserLocation){
-      this.rootApiService.reverseGeoCode({lat: this.currentUserLocation.lat, lng: this.currentUserLocation.lng}).subscribe((res: any) => {
+      this.rootApiService.reverseGeoCode({lat: loc.lat, lng: loc.lng}).subscribe((res: any) => {
         console.log(res);
         const userLocation = {
           lat: res.features[0].properties.lat,
@@ -78,22 +83,24 @@ export class AppLandingComponent implements OnInit {
           state: res.features[0].properties.state,
           country: res.features[0].properties.country
         }
-  
+        localStorage.setItem('userLocation', JSON.stringify(userLocation));
         this.rootContextService.updateCurrentContext({currentUserLocation: userLocation});
-        this.hasUserLocation = true;
+        
       })
 
     }
   }
 
   selectUserLocation(location){
-    this.currentUserLocation = {
+    const loc = {
       lat: location.lat,
       lng: location.lon,
       state: location.state,
       country: location.country
     }
-    this.rootContextService.updateCurrentContext({currentUserLocation: this.currentUserLocation})
+    this.rootContextService.updateCurrentContext({currentUserLocation: loc})
+    localStorage.setItem('userLocation', JSON.stringify(loc));
+    this.hasUserLocation = true;
   }
 
   ngOnDestroy(){

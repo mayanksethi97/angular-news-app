@@ -23,7 +23,7 @@ export class RootApiService {
 
   reverseGeoCode(latLng){
     let URL = this.rootConfigService.getApiEndpoints().geoApify.reverseGeoCoding;
-    URL += `lat=${latLng.lat}&lon=${latLng.lng}`;
+    URL += `?lat=${latLng.lat}&lon=${latLng.lng}`;
     URL = this.rootConfigService.addGeoApifyKey(URL);
     return this.rootCoreService.reverseGeoCode(URL)
   }

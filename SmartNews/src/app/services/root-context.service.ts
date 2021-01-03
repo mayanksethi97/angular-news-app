@@ -14,12 +14,12 @@ export interface IContext{
 
 export class RootContextService {
 
-  
   public ContextChange$ = new Subject<IContext>();
   private currentContext: IContext;
+
   constructor(
     private activatedRoute: ActivatedRoute
-  ) { }
+  ) {}
 
   initContext(currentCapability){
     this.currentContext = {
