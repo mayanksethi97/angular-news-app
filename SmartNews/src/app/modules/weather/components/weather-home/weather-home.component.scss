@@ -1,0 +1,125 @@
+.bar{
+    margin:0 auto;
+    width:575px;
+    border-radius:5pxpx;
+    border:1px solid #dcdcdc;
+    display: block;
+    position: relative;
+    background: white;
+    border-radius: 10px;
+    
+  }
+  .bar:hover{
+    box-shadow: 1px 1px 8px 1px #1d1b1b;
+  }
+  .bar:focus-within{
+    box-shadow: 1px 1px 8px 1px #1e1d1d;
+    outline:none;
+  }
+  .searchbar{
+    height:45px;
+    border:none;
+    width:500px;
+    font-size:16px;
+    outline: none;
+    border-radius: 10px;
+    
+  }
+  .voice{
+    height:20px;
+    position:relative;
+    top:5px;
+    left:10px;
+  }
+
+  .adjust{
+      margin-top: 20px;
+      display: flex;
+      flex-wrap: wrap;
+  }
+
+  .weather-container{
+      display: flex;
+      margin: 50px;
+      flex-wrap: wrap;
+  }
+
+  .searchbar-container{
+    
+  }
+
+  .searchbox{
+      flex:1;
+  }
+
+  .weather-container div{
+      padding: 10px
+  }
+
+  .left{
+      flex: 1;
+      line-height: 0.4em;
+  }
+
+  .right{
+      flex: 1
+  }
+
+
+
+.widget
+{
+  position: relative;
+  width: 80%;
+  height: 80%;
+  margin: 50px auto;
+  background-color: #fcfdfd;
+  border-radius: 9px;
+  padding: 25px;
+  padding-right: 30px;
+  box-shadow: 0px 31px 35px -26px #080c21;
+}
+
+.left-panel
+{
+  
+}
+
+.date
+{
+  font-size: 14px;
+  font-weight: bold;
+  color: rgba(0,0,0,0.5);
+}
+
+.city
+{
+  font-size: 21px;
+  font-weight: bold;
+  text-transform: uppercase;
+  padding-top: 5px;
+  color: rgba(0,0,0,0.7);
+}
+
+.temp
+{
+  font-size: 81px;
+  color: rgba(0,0,0,0.9);
+  font-weight: 100;
+}
+
+.panel
+{
+  display: inline-block;
+}
+
+.right-panel
+{
+  position: relative;
+  float: right;
+  top: 0;
+  padding-left: 10px;
+}
+
+
+#map { position: absolute; top: 0; bottom: 0; width: 100% }

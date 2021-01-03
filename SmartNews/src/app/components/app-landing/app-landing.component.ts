@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { debounce, debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { RootApiService } from '../../services/root-api.service';
 import { RootContextService } from '../../services/root-context.service';
 @Component({
@@ -25,7 +26,6 @@ export class AppLandingComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    
     this.getUserLocation();
     this.subscribeToContextChange();
   }
@@ -41,11 +41,12 @@ export class AppLandingComponent implements OnInit {
 
   getLocations(searchInput){
     console.log(searchInput)
-    this.rootApiService.getLocationsData(searchInput).subscribe((locations: any) => {
-      this.locationsData = locations.locationsArray;
-      console.log(this.locationsData);
-    })
+    this.rootApiService.getLocationsData(searchInput).pipe(
+      debounceTime(1000), 
+      distinctUntilChanged())
+      .subscribe((locations: any) => this.locationsData = locations.locationsArray);
   }
+  
 
   getUserLocation(){
     let gotUserLocation = false;
@@ -67,10 +68,10 @@ export class AppLandingComponent implements OnInit {
           this.reverseGeoCode(gotUserLocation, loc);
         });
     } else {
-       console.log("No support for geolocation")
+       console.log("No support for geolocation");
+       alert("No Support for Geolocation");
     }
     }
-    
   }
 
   reverseGeoCode(gotUserLocation, loc){
@@ -85,9 +86,7 @@ export class AppLandingComponent implements OnInit {
         }
         localStorage.setItem('userLocation', JSON.stringify(userLocation));
         this.rootContextService.updateCurrentContext({currentUserLocation: userLocation});
-        
       })
-
     }
   }
 
