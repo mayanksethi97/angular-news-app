@@ -5,6 +5,8 @@ import { MapboxStyleDefinition, MapboxStyleSwitcherControl } from "mapbox-gl-sty
 import "mapbox-gl-style-switcher/styles.css";
 import { WeatherService } from '../../services/weather.service';
 import { RootApiService } from '../../../../services/root-api.service';
+import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
+import { RootContextService } from '../../../../services/root-context.service';
 interface IDisplayWidget{
   date: Date,
   geoLocation: any,
@@ -27,10 +29,12 @@ export class WeatherHomeComponent implements OnInit {
   onDragEnd;
   displayWidgetObj: IDisplayWidget;
   showWeatherWidget = false;
+  locationsData = [];
 
   constructor(
     private weatherService: WeatherService,
-    private rootApiService: RootApiService
+    private rootApiService: RootApiService,
+    private rootContextService: RootContextService
   ) { }
 
   ngOnInit(): void {
@@ -105,6 +109,21 @@ export class WeatherHomeComponent implements OnInit {
       })
       
     });
+  }
+
+  getLocations(searchInput){
+    this.rootApiService.getLocationsData(searchInput).pipe(
+      debounceTime(1000), 
+      distinctUntilChanged())
+      .subscribe((locations: any) => this.locationsData = locations.locationsArray);
+   
+  }
+
+  selectUserLocation(location){
+    console.log(location);
+    var latLng = {lat: location.lat, lng: location.lon}
+    this.getWeatherDetails(latLng);
+    this.flyAndAddMarker([location.lon, location.lat])
   }
 
 

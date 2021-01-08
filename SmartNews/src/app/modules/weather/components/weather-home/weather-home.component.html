@@ -1,48 +1,56 @@
-<div id="map">
-</div>
+<div id="map"></div>
 
+<div class="container adjust"></div>
 
-<div class="container adjust">
-    
-</div>
-
-<div class="searchbar-container">
-        <div class="bar">
-            <input class="searchbar" type="text" placeholder="search your location" title="Search">
-            <a href="#"><i class="fa fa-search"></i></a>
-        </div>  
-</div>
-    
+<form class="text-center border border-light p-5">
+  <div class="form-group typeahead">
+    <input
+      type="text"
+      class="form-control typeahead-input bar"
+      id="addLocation"
+      placeholder="Enter your location"
+      autocomplete="off"
+      #location
+      (keyup)="getLocations(location.value)"
+      (keydown)="getLocations(location.value)"
+    />
+    <div class="list-group bar">
+      <a
+        *ngFor="let location of locationsData"
+        (click)="selectUserLocation(location)"
+        class="list-group-item"
+        >{{ location.state }}
+        <small class="text-muted">{{ location.result_type }}</small> |
+        <small class="text-muted">{{ location.country }}</small>
+      </a>
+    </div>
+  </div>
+</form>
 
 <div *ngIf="showWeatherWidget" class="weather-container">
-    <div class="left">
-        <div class="widget">
-            <div class="left-panel panel">
-                <div class="date">
-                    {{displayWidgetObj.date | date: 'fullDate'}}
-                </div>
-                <div class="city">
-                    {{displayWidgetObj.geoLocation.state}}, {{displayWidgetObj.geoLocation.country}}
-                </div>
-                <div class="temp">
-                   <img src={{displayWidgetObj.icon}} alt="" width="60">
-                   {{displayWidgetObj.weather.current.temp}}&deg;
-                </div>
-            </div>
-            <br>
-            <h3><strong>{{displayWidgetObj.weather.current.weather[0].main}}</strong></h3>
-            <h5>Feels like {{displayWidgetObj.weather.current.feels_like}}</h5>
-            <h5>humidity {{displayWidgetObj.weather.current.humidity}}</h5>
-            <div class="right-panel">
-                
-            </div>
-
+  <div class="left">
+    <div class="widget">
+      <div class="left-panel panel">
+        <div class="date">
+          {{ displayWidgetObj.date | date: "fullDate" }}
         </div>
+        <div class="city">
+          {{ displayWidgetObj.geoLocation.state }},
+          {{ displayWidgetObj.geoLocation.country }}
+        </div>
+        <div class="temp">
+          <img src="{{ displayWidgetObj.icon }}" alt="" width="60" />
+          {{ displayWidgetObj.weather.current.temp }}&deg;
+        </div>
+      </div>
+      <br />
+      <h3>
+        <strong>{{ displayWidgetObj.weather.current.weather[0].main }}</strong>
+      </h3>
+      <h5>Feels like {{ displayWidgetObj.weather.current.feels_like }}</h5>
+      <h5>humidity {{ displayWidgetObj.weather.current.humidity }}</h5>
+      <div class="right-panel"></div>
     </div>
-    <div class="right">
-        
-    </div>
+  </div>
+  <div class="right"></div>
 </div>
-
-
-
