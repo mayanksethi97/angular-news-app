@@ -1,144 +1,19 @@
 <div *ngIf="hasUserLocation; else getLocationTemplate">
   <div class="bg">
-    <mdb-navbar SideClass="navbar navbar-expand-lg " [containerInside]="false">
-      <mdb-navbar-brand
-        ><a class="navbar-brand" href="#">
-          <div class="row">
-            <div class="col-sm d-flex justify-content-start"></div>
-            <img src="../../../assets/news-globe.png" style="height: 60px" />
-            <h1 class="display-6 text-light">
-              WORLD NEWS <small style="display:inline">({{ currentUserLocation.state }})</small>
-            </h1>
-          </div>
-        </a></mdb-navbar-brand
-      >
-      <links>
-        <form
-          class="form-inline waves-light waves-light ml-auto"
-          mdbWavesEffect
-        >
-          <div class="md-form my-0">
-            <input
-              class="form-control mr-sm-2"
-              type="text"
-              placeholder="Search"
-              aria-label="Search"
-            />
-          </div>
-        </form>
-      </links>
-    </mdb-navbar>
-    <hr style="border: 1px solid white" />
-
-    <div class="w-100 p-3">
-      <div class="row">
-        <div class="col-md-5 center">
-          <div
-            class="embed-responsive embed-responsive-16by9 img-fluid z-depth-2 rounded hover-zoom"
-          >
-            <iframe
-              class="embed-responsive-item"
-              src="https://www.youtube.com/embed/vlDzYIIOYmM"
-              allowfullscreen
-            ></iframe>
-          </div>
-        </div>
-        <div class="col-md-7 center">
-          <div class="row sub-row">
-            <div class="col-md-4">
-              <img
-                src="../../../assets/breaking-news.jpg"
-                alt="thumbnail"
-                class="embed-responsive embed-responsive-16by9 img-fluid z-depth-2 rounded hover-zoom"
-              />
-            </div>
-            <div class="col-md-4">
-              <img
-                src="../../../assets/charts.png"
-                alt="thumbnail"
-                class="embed-responsive embed-responsive-16by9 img-fluid z-depth-2 rounded hover-zoom"
-              />
-            </div>
-            <div class="col-md-4">
-              <img
-                src="../../../assets/health.jpg"
-                alt="thumbnail"
-                class="embed-responsive embed-responsive-16by9 img-fluid z-depth-2 rounded hover-zoom"
-              />
-            </div>
-          </div>
-          <div class="row sub-row">
-            <div class="col-md-4">
-              <img
-                src="../../../assets/podcasts.png"
-                alt="thumbnail"
-                class="embed-responsive embed-responsive-16by9 img-fluid z-depth-2 rounded hover-zoom"
-              />
-            </div>
-            <div class="col-md-4">
-              <img
-                src="../../../assets/radio.png"
-                alt="thumbnail"
-                class="embed-responsive embed-responsive-16by9 img-fluid z-depth-2 rounded hover-zoom"
-              />
-            </div>
-            <div class="col-md-4">
-              <img
-                src="../../../assets/weather.jpeg"
-                alt="thumbnail"
-                class="embed-responsive embed-responsive-16by9 img-fluid z-depth-2 rounded hover-zoom"
-              />
-            </div>
-          </div>
-        </div>
+    <div class="container">
+      <div class="row justify-content-center">
+        <h1 class="display-1 heading">WEATHER APP</h1>
       </div>
     </div>
-
+    
     <div class="row w-100"></div>
     <br /><br /><br />
 
     <div class="row">
       <div class="col-sm d-flex justify-content-center">
-        <a
-          mdbBtn
-          color="white"
-          outline="true"
-          class="wow fadeInDown waves-light big"
-          data-wow-delay="0.4s"
-          mdbWavesEffect
-          routerLink="/news"
-          ><h3 class="center-text">NEWS</h3></a
-        >
-        <a
-          mdbBtn
-          color="white"
-          outline="true"
-          class="wow fadeInDown waves-light big"
-          data-wow-delay="0.4s"
-          mdbWavesEffect
-          routerLink="/radio"
-          ><h3 class="center-text">RADIO</h3></a
-        >
-        <a
-          mdbBtn
-          color="white"
-          outline="true"
-          class="wow fadeInDown waves-light big"
-          data-wow-delay="0.4s"
-          mdbWavesEffect
-          routerLink="/weather"
-          ><h3 class="center-text">WEATHER</h3></a
-        >
-        <a
-          mdbBtn
-          color="white"
-          outline="true"
-          class="wow fadeInDown waves-light big"
-          data-wow-delay="0.4s"
-          mdbWavesEffect
-          routerLink="/podcast"
-          ><h3 class="center-text">PODCAST</h3></a
-        >
+        <div class="row justify-content-center">
+          <a routerLink="/weather" id="enterButton"><h1 class="display-6 heading-center">CLICK TO ENTER</h1></a>
+        </div>
       </div>
     </div>
   </div>
@@ -163,9 +38,14 @@
           (keyup)="getLocations(location.value)"
         />
         <div class="typeahead-dropdown list-group">
-                <a *ngFor="let location of locationsData" (click)="selectUserLocation(location)" class="list-group-item"
-                  >{{location.state}} <small class="text-muted">{{location.result_type}}</small> | <small class="text-muted">{{location.country}}</small>
-                </a>
+          <a
+            *ngFor="let location of locationsData"
+            (click)="selectUserLocation(location)"
+            class="list-group-item"
+            >{{ location.state }}
+            <small class="text-muted">{{ location.result_type }}</small> |
+            <small class="text-muted">{{ location.country }}</small>
+          </a>
         </div>
       </div>
     </form>

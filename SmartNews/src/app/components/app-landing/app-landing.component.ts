@@ -4,6 +4,9 @@ import { Subscription } from 'rxjs';
 import { debounce, debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { RootApiService } from '../../services/root-api.service';
 import { RootContextService } from '../../services/root-context.service';
+
+declare let annyang: any;
+declare let SpeechKITT: any;
 @Component({
   selector: 'app-app-landing',
   templateUrl: './app-landing.component.html',
@@ -28,6 +31,7 @@ export class AppLandingComponent implements OnInit {
   ngOnInit(): void {
     this.getUserLocation();
     this.subscribeToContextChange();
+    this.setupAnnyang();
   }
 
 
@@ -71,6 +75,30 @@ export class AppLandingComponent implements OnInit {
        console.log("No support for geolocation");
        alert("No Support for Geolocation");
     }
+    }
+  }
+
+  setupAnnyang(){
+    if (annyang) {
+      var commands = {
+        'click enter': () => {
+          document.getElementById('enterButton').click();
+        },
+        'take me inside': () => {
+          document.getElementById('enterButton').click();
+        },
+        'start': () => {
+          document.getElementById('enterButton').click();
+        }
+        
+      };
+      annyang.addCommands(commands);
+      SpeechKITT.annyang();
+      SpeechKITT.setStylesheet(
+        '//cdnjs.cloudflare.com/ajax/libs/SpeechKITT/0.3.0/themes/flat.css'
+      );
+      SpeechKITT.setSampleCommands(['take me to punjab', 'navigate to delhi', 'show my city weather details']);
+      SpeechKITT.vroom();
     }
   }
 

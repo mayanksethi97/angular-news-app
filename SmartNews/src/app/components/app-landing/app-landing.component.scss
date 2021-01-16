@@ -7,10 +7,44 @@
   left: 0;
   min-width: 100%;
   min-height: 100%;
-  background-image: url('../../../assets/app-landing-bg-2.jpg');
+  background-image: url('../../../assets/source.gif');
   background-size: cover;
   }
 
+  .heading{
+      font-family: "Audiowide", sans-serif;
+      color:black;
+      display: inline;
+      margin-top: 20%;
+      background-color: LightGray;
+      text-shadow: 5px 10px  blue;
+      border: 10px solid red;
+      cursor: pointer;
+  }
+
+  .heading:hover {
+    background-color: yellow;
+    color:black;
+    text-shadow: 5px 10px  red;
+    border: 20px solid white;
+  }
+  .heading-center:hover {
+    background-color: yellow;
+    color:black;
+    text-shadow: 2px 5px  red;
+    border: 20px solid white;
+  }
+
+  .heading-center{
+    font-family: "Audiowide", sans-serif;
+      color:black;
+      display: inline;
+      background-color: LightGray;
+      text-shadow: 2px 5px  blue;
+      border: 10px solid red;
+      cursor: pointer;
+
+  }
   .bg2{
     position: absolute; 
     top: 0; 
@@ -167,4 +201,11 @@ a {
       visibility: visible;
     }
   }
+}
+
+.center{
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
 }
